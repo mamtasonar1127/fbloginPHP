@@ -32,6 +32,17 @@
 
   function fbLogin(){
 
+    FB.login(function(response){
+
+      if(response.authResponse){
+        fbAfterLogin();
+
+          }
+        });
+    }
+
+  function fbAfterLogin(){
+
     FB.getLoginStatus(function(response) {
     if (response.status === 'connected') {
       FB.api('/me', function(response) {

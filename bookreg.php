@@ -1,91 +1,69 @@
-<?php include("header.php"); ?>
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
-            <div id="page-inner">
-                            
-                  <hr />
-                
-                  <!-- /. ROW  --> 
-
-
-
-<script>
-  window.fbAsyncInit = function() {
+<?php
+//awebthgj_yt
+session_start();
+?>
+<html>
+  <head>
+    
+  </head>
+  <body>
+    
+  <script>
+    window.fbAsyncInit = function() {
     FB.init({
       appId      : '2326490944312508',
       cookie     : true,
       xfbml      : true,
       version    : 'v3.1'
     });
-      
     FB.AppEvents.logPageView();   
-      
-  };
+    };
 
-  (function(d, s, id){
+    (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-
-  function fbLogin(){
-
-    FB.login(function(response){
-
-      if(response.authResponse){
-        fbAfterLogin();
-
-          }
-        });
-    }
-
-  function fbAfterLogin(){
-
-    FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      FB.api('/me', function(response) {
-        console.log(reponse);
+     }(document, 'script', 'facebook-jssdk'));
+     
+     function fbLogin(){
+      FB.login(function(response){
+        if(response.authResponse){
+          fbAfterLogin();
+        }
       });
-  }
-});
-  }
-
-
+     }
+     
+     function fbAfterLogin(){
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {   // Lo
+        FB.api('/me', function(response) {
+          jQuery.ajax({
+          url:'check_login.php',
+          type:'post',
+          data:'name='+response.name+'&id='+response.id,
+          success:function(result){
+            window.location.href='index.php';
+          }
+          });
+        });
+      }
+    });
+     }
 </script>
-
-
-
-<!--<form method="post"> 
-   <div class="row text-center pad-top" style="margin-left: 387px;">
-                 
-          
-            <b style="margin-left: -450px;">Login To Register Book</b>
-            <br>
-
-            <div class="input-group">
-              <input type="Email" class="form-control" placeholder="Enter your Email Id" name="emaillog" />
-            </div>
-            <br />
-
-            <div class="input-group">
-               <input type="password" class="form-control" placeholder="Enter your password" name="passlog" />
-            </div>
-            <br /> 
-
-            <input type="submit" value="Login" name="acclog" style="margin-left: -450px;">
-
-            New User: <a href="signup.php">SignUp</a>-->
-            
-
-           <h1><a href="javascript:void(0)" onclick="fbLogin()">Login with facebook</a></h1>
-
-           
-  </div>
-
-
-    <br>
-
-</form>
-   
+<?php
+if(isset($_SESSION['FB_ID']) && $_SESSION['FB_ID']!=''){
+  echo 'Welcome '.$_SESSION['FB_NAME'];
+  echo "<br/>";
+  ?>
+  <a href="logout.php">Logout</a>
+  <?php
+}else{
+?>
+<a href="javascript:void(0)" onclick="fbLogin()">Login with Facebook</a>
+<?php } ?>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  </body>
+</html>

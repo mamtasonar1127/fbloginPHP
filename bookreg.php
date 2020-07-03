@@ -15,7 +15,7 @@
       appId      : '2326490944312508',
       cookie     : true,
       xfbml      : true,
-      version    : 'v6.o'
+      version    : 'v3.1'
     });
       
     FB.AppEvents.logPageView();   
@@ -57,7 +57,7 @@
 
 
 
-<form method="post"> 
+<!--<form method="post"> 
    <div class="row text-center pad-top" style="margin-left: 387px;">
                  
           
@@ -72,14 +72,16 @@
             <div class="input-group">
                <input type="password" class="form-control" placeholder="Enter your password" name="passlog" />
             </div>
-            <br />
+            <br /> 
 
             <input type="submit" value="Login" name="acclog" style="margin-left: -450px;">
+
+            New User: <a href="signup.php">SignUp</a>-->
             
 
            <h1><a href="javascript:void(0)" onclick="fbLogin()">Login with facebook</a></h1>
 
-           New User: <a href="signup.php">SignUp</a>
+           
   </div>
 
 
